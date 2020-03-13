@@ -14,12 +14,12 @@ class MyPointsTableTest {
                 Arguments.of(0, "0/0 0/0 0/0"),
                 Arguments.of(1, "0/0 0/0 15/0"),
                 Arguments.of(2, "0/0 0/0 30/0"),
-                Arguments.of(3, "0/0 0/0 40/0")
-//                Arguments.of(4, "0/0 1/0 0/0"),
-//                Arguments.of(5, "0/0 1/0 15/0"),
-//                Arguments.of(6, "0/0 1/0 30/0"),
-//                Arguments.of(7, "0/0 1/0 40/0"),
-//                Arguments.of(8, "0/0 2/0 0/0")
+                Arguments.of(3, "0/0 0/0 40/0"),
+                Arguments.of(4, "0/0 1/0 0/0"),
+                Arguments.of(5, "0/0 1/0 15/0"),
+                Arguments.of(6, "0/0 1/0 30/0"),
+                Arguments.of(7, "0/0 1/0 40/0"),
+                Arguments.of(8, "0/0 2/0 0/0")
         );
     }
 
