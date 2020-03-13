@@ -4,10 +4,11 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import pl.proccorp.eqpoints.general.ScoreTable;
 
 import java.util.List;
 
-class MyPointsTableTest {
+class MatchTableTest {
 
     static List<Arguments> list() {
         return List.of(
@@ -26,13 +27,13 @@ class MyPointsTableTest {
     @ParameterizedTest
     @MethodSource("list")
     void initScoreShouldBeCorrect(int numberOfPointsWonByA, String expectedResult) {
-        PointsTable table = new MyPointsTable();
+        ScoreTable table = new MatchTable();
         addPointsForPlayerA(table, numberOfPointsWonByA);
         String score = table.currentScore();
         Assertions.assertThat(score).isEqualTo(expectedResult);
     }
 
-    private void addPointsForPlayerA(PointsTable table, int numberOfPoints) {
+    private void addPointsForPlayerA(ScoreTable table, int numberOfPoints) {
         for (int i = 0; i < numberOfPoints; i++) {
             table.playerAWonPoint();
         }
