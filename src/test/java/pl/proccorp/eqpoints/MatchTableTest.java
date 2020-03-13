@@ -53,7 +53,7 @@ class MatchTableTest {
     @MethodSource("playerBResults")
     void playerBShouldBeAbleToGetPointsAndGames(int numberOfPointsWonByA, String expectedResult) {
         table = new MatchTable();
-        addPointsForPlayerA(numberOfPointsWonByA);
+        addPointsForPlayerB(numberOfPointsWonByA);
         String score = table.currentScore();
         Assertions.assertThat(score).isEqualTo(expectedResult);
     }
@@ -61,6 +61,12 @@ class MatchTableTest {
     private void addPointsForPlayerA(int numberOfPoints) {
         for (int i = 0; i < numberOfPoints; i++) {
             this.table.playerAWonPoint();
+        }
+    }
+
+    private void addPointsForPlayerB(int numberOfPoints) {
+        for (int i = 0; i < numberOfPoints; i++) {
+            this.table.playerBWonPoint();
         }
     }
 }
