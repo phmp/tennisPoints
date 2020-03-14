@@ -23,7 +23,14 @@ class MatchTableTest {
                 Arguments.of(5, "0/0 1/0 15/0"),
                 Arguments.of(6, "0/0 1/0 30/0"),
                 Arguments.of(7, "0/0 1/0 40/0"),
-                Arguments.of(8, "0/0 2/0 0/0")
+                Arguments.of(8, "0/0 2/0 0/0"),
+                Arguments.of(12, "0/0 3/0 0/0"),
+                Arguments.of(16, "0/0 4/0 0/0"),
+                Arguments.of(20, "0/0 5/0 0/0"),
+                Arguments.of(24, "0/0 6/0 0/0"),
+                Arguments.of(28, "1/0 0/0 0/0"),
+                Arguments.of(56, "2/0 0/0 0/0"),
+                Arguments.of(60, "2/0 1/0 0/0")
         );
     }
 
