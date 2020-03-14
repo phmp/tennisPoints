@@ -1,6 +1,8 @@
 package pl.proccorp.eqpoints;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -8,9 +10,10 @@ import pl.proccorp.eqpoints.general.ScoreTable;
 
 import java.util.List;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class MatchTableTest {
 
-    static List<Arguments> playerAResults() {
+    List<Arguments> playerAResults() {
         return List.of(
                 Arguments.of(0, "0/0 0/0 0/0"),
                 Arguments.of(1, "0/0 0/0 15/0"),
@@ -24,7 +27,7 @@ class MatchTableTest {
         );
     }
 
-    static List<Arguments> playerBResults() {
+    List<Arguments> playerBResults() {
         return List.of(
                 Arguments.of(0, "0/0 0/0 0/0"),
                 Arguments.of(1, "0/0 0/0 0/15"),
@@ -38,12 +41,33 @@ class MatchTableTest {
         );
     }
 
+    List<Arguments> oneByOneResults() {
+        return List.of(
+                Arguments.of("A", "0/0 0/0 15/0"),
+                Arguments.of("B", "0/0 0/0 15/15"),
+                Arguments.of("A", "0/0 0/0 30/15"),
+                Arguments.of("B", "0/0 0/0 30/30"),
+                Arguments.of("A", "0/0 0/0 40/30"),
+                Arguments.of("B", "0/0 0/0 40/40"),
+                Arguments.of("A", "0/0 0/0 AD/40"),
+                Arguments.of("B", "0/0 0/0 40/40"),
+                Arguments.of("A", "0/0 0/0 AD/40"),
+                Arguments.of("B", "0/0 0/0 40/40"),
+                Arguments.of("A", "0/0 0/0 AD/40")
+        );
+    }
+
     private ScoreTable table;
+    private ScoreTable reusableScoreTable = new MatchTable();
+
+    @BeforeEach
+    void resetTable() {
+        table = new MatchTable();
+    }
 
     @ParameterizedTest
     @MethodSource("playerAResults")
     void playerAShouldBeAbleToGetPointsAndGames(int numberOfPointsWonByA, String expectedResult) {
-        table = new MatchTable();
         addPointsForPlayerA(numberOfPointsWonByA);
         String score = table.currentScore();
         Assertions.assertThat(score).isEqualTo(expectedResult);
@@ -52,10 +76,16 @@ class MatchTableTest {
     @ParameterizedTest
     @MethodSource("playerBResults")
     void playerBShouldBeAbleToGetPointsAndGames(int numberOfPointsWonByA, String expectedResult) {
-        table = new MatchTable();
         addPointsForPlayerB(numberOfPointsWonByA);
         String score = table.currentScore();
         Assertions.assertThat(score).isEqualTo(expectedResult);
+    }
+
+    @ParameterizedTest
+    @MethodSource("oneByOneResults")
+    void playerBShouldBeAbleToGetPointsAndGames(String player, String expectedResult) {
+        addPointsForPlayer(player);
+        Assertions.assertThat(reusableScoreTable.currentScore()).isEqualTo(expectedResult);
     }
 
     private void addPointsForPlayerA(int numberOfPoints) {
@@ -69,4 +99,16 @@ class MatchTableTest {
             this.table.playerBWonPoint();
         }
     }
+
+    private void addPointsForPlayer(String player) {
+        if ("A".equals(player)) {
+            this.reusableScoreTable.playerAWonPoint();
+        } else if ("B".equals(player)) {
+            this.reusableScoreTable.playerBWonPoint();
+        } else {
+            throw new RuntimeException("wrong player");
+        }
+    }
+
+
 }
