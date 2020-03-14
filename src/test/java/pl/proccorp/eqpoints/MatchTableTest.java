@@ -109,6 +109,4 @@ class MatchTableTest {
             throw new RuntimeException("wrong player");
         }
     }
-
-
 }

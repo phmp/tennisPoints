@@ -1,31 +1,31 @@
 package pl.proccorp.eqpoints;
 
 import pl.proccorp.eqpoints.general.ScoreTable;
-import pl.proccorp.eqpoints.specyfic.GameTable;
-import pl.proccorp.eqpoints.specyfic.SetTable;
+import pl.proccorp.eqpoints.specyfic.PointsTable;
+import pl.proccorp.eqpoints.specyfic.GamesTable;
 
 public class MatchTable implements ScoreTable {
 
-    private ScoreTable gameTable = new GameTable();
-    private ScoreTable setTable = new SetTable();
+    private ScoreTable pointsTable = new PointsTable();
+    private ScoreTable gamesTable = new GamesTable();
 
     public boolean playerAWonPoint() {
-        if (gameTable.playerAWonPoint()) {
-            setTable.playerAWonPoint();
-            gameTable = new GameTable();
+        if (pointsTable.playerAWonPoint()) {
+            gamesTable.playerAWonPoint();
+            pointsTable = new PointsTable();
         }
         return false;
     }
 
     public boolean playerBWonPoint() {
-        if (gameTable.playerBWonPoint()) {
-            setTable.playerBWonPoint();
-            gameTable = new GameTable();
+        if (pointsTable.playerBWonPoint()) {
+            gamesTable.playerBWonPoint();
+            pointsTable = new PointsTable();
         }
         return false;
     }
 
     public String currentScore() {
-        return "0/0 " + setTable.currentScore() + " " + gameTable.currentScore();
+        return "0/0 " + gamesTable.currentScore() + " " + pointsTable.currentScore();
     }
 }
