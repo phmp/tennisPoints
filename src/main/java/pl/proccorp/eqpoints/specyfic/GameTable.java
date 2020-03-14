@@ -13,10 +13,30 @@ public class GameTable extends SimplePointsTable {
     }
 
     @Override
-    public String currentScore(){
-        String playerAScore = pointsView.get(pointsOfPlayerA%numberOfPointsNeededToWin);
-        String playerBScore = pointsView.get(pointsOfPlayerB%numberOfPointsNeededToWin);
-        return playerAScore + '/' + playerBScore;
+    public boolean playerAWonPoint() {
+        return super.playerAWonPoint() && pointsOfPlayerA - pointsOfPlayerB >= 2;
+    }
+
+    @Override
+    public boolean playerBWonPoint() {
+        return super.playerBWonPoint() && pointsOfPlayerB - pointsOfPlayerA >= 2;
+    }
+
+    @Override
+    public String currentScore() {
+        try {
+            String playerAScore = pointsView.get(pointsOfPlayerA);
+            String playerBScore = pointsView.get(pointsOfPlayerB);
+            return playerAScore + '/' + playerBScore;
+        } catch (IndexOutOfBoundsException e) {
+            if (pointsOfPlayerA>pointsOfPlayerB ){
+                return "AD/40";
+            } else if (pointsOfPlayerA == pointsOfPlayerB){
+                return "40/40";
+            } else {
+                return "40/AD";
+            }
+        }
     }
 
 }
