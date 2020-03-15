@@ -65,8 +65,8 @@ class MatchTableTest {
         );
     }
 
-    private ScoreTable table;
-    private ScoreTable reusableScoreTable = new MatchTable();
+    private MatchTable table;
+    private MatchTable reusableScoreTable = new MatchTable();
 
     @BeforeEach
     void resetTable() {

@@ -4,10 +4,12 @@ import pl.proccorp.eqpoints.general.ScoreTableWithNeededAdvantage;
 
 import java.util.List;
 
+import static pl.proccorp.eqpoints.model.Player.A;
+import static pl.proccorp.eqpoints.model.Player.B;
+
 public class PointsTable extends ScoreTableWithNeededAdvantage {
 
     private final List<String> pointsView = List.of("0", "15", "30", "40");
-    private final List<String> adView = List.of("40", "AD", "WIN");
 
     public PointsTable() {
         super(4);
@@ -15,7 +17,7 @@ public class PointsTable extends ScoreTableWithNeededAdvantage {
 
     @Override
     public String currentScore() {
-        if (pointsOfPlayerA < numberOfPointsNeededToWin && pointsOfPlayerB < numberOfPointsNeededToWin) {
+        if (getPoints(A) < numberOfPointsNeededToWin && getPoints(B) < numberOfPointsNeededToWin) {
             return standardScore();
         } else {
             return scoreWithAdvantage();
@@ -23,17 +25,18 @@ public class PointsTable extends ScoreTableWithNeededAdvantage {
     }
 
     private String standardScore() {
-        String playerAScore = pointsView.get(pointsOfPlayerA);
-        String playerBScore = pointsView.get(pointsOfPlayerB);
+        String playerAScore = pointsView.get(getPoints(A));
+        String playerBScore = pointsView.get(getPoints(B));
         return playerAScore + '/' + playerBScore;
     }
 
     private String scoreWithAdvantage() {
-        int min = Math.min(pointsOfPlayerA, pointsOfPlayerB);
-        int indexOfScoreA = pointsOfPlayerA - min;
-        int indexOfScoreB = pointsOfPlayerB - min;
-        String playerAScore = adView.get(indexOfScoreA);
-        String playerBScore = adView.get(indexOfScoreB);
-        return playerAScore + '/' + playerBScore;
+        if(getPoints(A) > getPoints(B)){
+            return "AD/40";
+        } else if (getPoints(A) < getPoints(B)){
+            return "40/AD";
+        } else {
+            return "40/40";
+        }
     }
 }

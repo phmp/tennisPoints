@@ -1,27 +1,40 @@
 package pl.proccorp.eqpoints.general;
 
+import pl.proccorp.eqpoints.model.Player;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static pl.proccorp.eqpoints.model.Player.A;
+import static pl.proccorp.eqpoints.model.Player.B;
+
 public abstract class SimpleScoreTable implements ScoreTable {
 
     protected final int numberOfPointsNeededToWin;
-    protected int pointsOfPlayerA = 0;
-    protected int pointsOfPlayerB = 0;
+    private Map<Player, Integer> map = new HashMap<>();
 
     public SimpleScoreTable(int numberOfPointsNeededToWin) {
         this.numberOfPointsNeededToWin = numberOfPointsNeededToWin;
     }
 
-    @Override
-    public boolean playerAWonPoint (){
-        return ++pointsOfPlayerA == numberOfPointsNeededToWin;
+    protected int getPoints(Player player) {
+        return map.getOrDefault(player, 0);
     }
 
     @Override
-    public boolean playerBWonPoint(){
-        return ++pointsOfPlayerB == numberOfPointsNeededToWin;
+    public void addPointFor(Player player) {
+        int score = getPoints(player);
+        map.put(player, score + 1);
     }
 
-    public String currentScore(){
-        return "" + pointsOfPlayerA + '/' + pointsOfPlayerB;
+    @Override
+    public boolean won(Player player) {
+        return getPoints(player) >= numberOfPointsNeededToWin;
+    }
+
+    @Override
+    public String currentScore() {
+        return "" + getPoints(A) + '/' + getPoints(B);
     }
 
 }

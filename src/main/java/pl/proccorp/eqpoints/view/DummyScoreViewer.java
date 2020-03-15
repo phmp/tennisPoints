@@ -1,14 +1,13 @@
 package pl.proccorp.eqpoints.view;
 
 import pl.proccorp.eqpoints.MatchTable;
-import pl.proccorp.eqpoints.general.ScoreTable;
 
 import static spark.Spark.get;
 import static spark.Spark.port;
 
 public class DummyScoreViewer {
 
-    private static ScoreTable matchTable = new MatchTable();
+    private static MatchTable matchTable = new MatchTable();
 
     public static void main(String... ars) {
         port(8181);
