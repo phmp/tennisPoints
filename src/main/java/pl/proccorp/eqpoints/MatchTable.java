@@ -5,6 +5,7 @@ import pl.proccorp.eqpoints.model.Player;
 import pl.proccorp.eqpoints.specyfic.GamesTable;
 import pl.proccorp.eqpoints.specyfic.PointsTable;
 import pl.proccorp.eqpoints.specyfic.SetsTable;
+import pl.proccorp.eqpoints.specyfic.TieBreakTable;
 
 import static pl.proccorp.eqpoints.model.Player.A;
 import static pl.proccorp.eqpoints.model.Player.B;
@@ -18,13 +19,16 @@ public class MatchTable {
     private void playerWonPoint(Player player) {
         pointsTable.addPointFor(player);
         if (pointsTable.won(player)) {
-            pointsTable = new PointsTable();
-
             gamesTable.addPointFor(player);
-            if (gamesTable.won(player)) {
-                gamesTable = new GamesTable();
+            if ("6/6".equals(gamesTable.currentScore())){
+                pointsTable = new TieBreakTable();
+            } else {
+                pointsTable = new PointsTable();
+            }
 
+            if (gamesTable.won(player)) {
                 setsTable.addPointFor(player);
+                gamesTable = new GamesTable();
             }
         }
     }
