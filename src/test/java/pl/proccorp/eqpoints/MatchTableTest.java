@@ -2,11 +2,11 @@ package pl.proccorp.eqpoints;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import pl.proccorp.eqpoints.general.ScoreTable;
 
 import java.util.List;
 
@@ -94,6 +94,36 @@ class MatchTableTest {
     void playerBShouldBeAbleToGetPointsAndGames(String player, String expectedResult) {
         addPointsForPlayer(player);
         Assertions.assertThat(reusableScoreTable.currentScore()).isEqualTo(expectedResult);
+    }
+
+    @Test
+    void onState_6to6_tiebreakShouldBePlayed(){
+        MatchTable table = new MatchTable();
+        repeat(() -> {
+            repeat(table::playerAWonPoint, 4);
+            repeat(table::playerBWonPoint, 4);
+        },6);
+        Assertions.assertThat(table.currentScore()).isEqualTo("0/0 6/6 0/0");
+        table.playerAWonPoint();
+        Assertions.assertThat(table.currentScore()).isEqualTo("0/0 6/6 1/0");
+        table.playerAWonPoint();
+        Assertions.assertThat(table.currentScore()).isEqualTo("0/0 6/6 2/0");
+        table.playerBWonPoint();
+        Assertions.assertThat(table.currentScore()).isEqualTo("0/0 6/6 2/1");
+        table.playerAWonPoint();
+        Assertions.assertThat(table.currentScore()).isEqualTo("0/0 6/6 3/1");
+        table.playerAWonPoint();
+        table.playerAWonPoint();
+        table.playerAWonPoint();
+        Assertions.assertThat(table.currentScore()).isEqualTo("0/0 6/6 6/1");
+        table.playerAWonPoint();
+        Assertions.assertThat(table.currentScore()).isEqualTo("1/0 0/0 0/0");
+    }
+
+    void repeat(Runnable action, int numberOfTimes){
+        for (int i=0 ; i<numberOfTimes ; i++){
+            action.run();
+        }
     }
 
     private void addPointsForPlayerA(int numberOfPoints) {
