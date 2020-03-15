@@ -61,6 +61,7 @@ class MatchTableTest {
                 Arguments.of("A", "0/0 0/0 AD/40"),
                 Arguments.of("B", "0/0 0/0 40/40"),
                 Arguments.of("A", "0/0 0/0 AD/40")
+//                Arguments.of("A", "0/0 1/0 0/0")
         );
     }
 

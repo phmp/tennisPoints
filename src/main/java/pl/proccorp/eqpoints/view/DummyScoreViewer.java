@@ -21,6 +21,10 @@ public class DummyScoreViewer {
             matchTable.playerBWonPoint();
             return score();
         });
+        get("/points/reset", (request, response) -> {
+            matchTable = new MatchTable();
+            return score();
+        });
     }
 
     private static String score() {
@@ -33,7 +37,8 @@ public class DummyScoreViewer {
             "<body>\n" +
             "<a href=\"http://localhost:8181/points/A\">A</a> <br></br>\n" +
             "<a href=\"http://localhost:8181/points/B\">B</a> <br></br>\n" +
-            "{{score}}\n" +
+            "{{score}} <br></br>\n" +
+            "<a href=\"http://localhost:8181/points/reset\">reset</a> <br></br>\n" +
             "</body>\n" +
             "</html>";
 }
