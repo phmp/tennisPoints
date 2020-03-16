@@ -93,6 +93,36 @@ class MatchTableTest {
     }
 
     @Test
+    void lastSetShouldBePlayedLonger() {
+        MatchTable table = new MatchTable();
+        addSetForPlayerA(table);
+        addSetForPlayerB(table);
+        addSetForPlayerA(table);
+        addSetForPlayerB(table);
+        assertThat(table.currentScore()).isEqualTo("2/2 0/0 0/0");
+        addSixGamesForBothPlayers(table);
+        assertThat(table.currentScore()).isEqualTo("2/2 6/6 0/0");
+
+        addPointAndCheckScore(table, "A", "2/2 6/6 15/0");
+        addPointAndCheckScore(table, "A", "2/2 6/6 30/0");
+        addPointAndCheckScore(table, "A", "2/2 6/6 40/0");
+        addPointAndCheckScore(table, "A", "2/2 7/6 0/0");
+
+        addPointAndCheckScore(table, "B", "2/2 7/6 0/15");
+        addPointAndCheckScore(table, "B", "2/2 7/6 0/30");
+        addPointAndCheckScore(table, "B", "2/2 7/6 0/40");
+        addPointAndCheckScore(table, "B", "2/2 7/7 0/0");
+    }
+
+    private void addSetForPlayerA(MatchTable table) {
+        repeat(()->addGameForPlayerA(table),7);
+    }
+
+    private void addSetForPlayerB(MatchTable table) {
+        repeat(()->addGameForPlayerB(table),7);
+    }
+
+    @Test
     void onState_6to6_tiebreakShouldBePlayed() {
         MatchTable table = new MatchTable();
         addSixGamesForBothPlayers(table);
