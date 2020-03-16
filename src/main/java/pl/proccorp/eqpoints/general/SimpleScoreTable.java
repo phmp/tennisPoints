@@ -22,7 +22,7 @@ public abstract class SimpleScoreTable implements ScoreTable {
     }
 
     @Override
-    public void addPointFor(Player player) {
+    public void addOneFor(Player player) {
         int score = getPoints(player);
         map.put(player, score + 1);
     }

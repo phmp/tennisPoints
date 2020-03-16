@@ -14,12 +14,12 @@ public class MatchTable {
     private ScoreTable setsTable = new SetsTable();
 
     private void playerWonPoint(Player player) {
-        pointsTable.addPointFor(player);
+        pointsTable.addOneFor(player);
         if (pointsTable.won(player)) {
-            gamesTable.addPointFor(player);
+            gamesTable.addOneFor(player);
             resetPointsTable();
             if (gamesTable.won(player)) {
-                setsTable.addPointFor(player);
+                setsTable.addOneFor(player);
                 resetGameTable();
             }
         }

@@ -24,13 +24,13 @@ class SimpleScoreTableTest {
     @MethodSource("tables")
     void pointsShouldBeCountedUsingSimpleNumbers(SimpleScoreTable table){
         Assertions.assertThat(table.currentScore()).isEqualTo("0/0");
-        table.addPointFor(Player.A);
+        table.addOneFor(Player.A);
         Assertions.assertThat(table.currentScore()).isEqualTo("1/0");
-        table.addPointFor(Player.B);
+        table.addOneFor(Player.B);
         Assertions.assertThat(table.currentScore()).isEqualTo("1/1");
-        table.addPointFor(Player.A);
+        table.addOneFor(Player.A);
         Assertions.assertThat(table.currentScore()).isEqualTo("2/1");
-        table.addPointFor(Player.A);
+        table.addOneFor(Player.A);
         Assertions.assertThat(table.currentScore()).isEqualTo("3/1");
     }
 
