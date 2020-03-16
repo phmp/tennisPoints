@@ -27,10 +27,9 @@ class MatchTableTest {
                 Arguments.of(12, "0/0 3/0 0/0"),
                 Arguments.of(16, "0/0 4/0 0/0"),
                 Arguments.of(20, "0/0 5/0 0/0"),
-                Arguments.of(24, "0/0 6/0 0/0"),
-                Arguments.of(28, "1/0 0/0 0/0"),
-                Arguments.of(56, "2/0 0/0 0/0"),
-                Arguments.of(60, "2/0 1/0 0/0")
+                Arguments.of(24, "1/0 0/0 0/0"),
+                Arguments.of(48, "2/0 0/0 0/0"),
+                Arguments.of(52, "2/0 1/0 0/0")
         );
     }
 
@@ -48,10 +47,9 @@ class MatchTableTest {
                 Arguments.of(12, "0/0 0/3 0/0"),
                 Arguments.of(16, "0/0 0/4 0/0"),
                 Arguments.of(20, "0/0 0/5 0/0"),
-                Arguments.of(24, "0/0 0/6 0/0"),
-                Arguments.of(28, "0/1 0/0 0/0"),
-                Arguments.of(56, "0/2 0/0 0/0"),
-                Arguments.of(60, "0/2 0/1 0/0")
+                Arguments.of(24, "0/1 0/0 0/0"),
+                Arguments.of(48, "0/2 0/0 0/0"),
+                Arguments.of(52, "0/2 0/1 0/0")
         );
     }
 
@@ -115,11 +113,11 @@ class MatchTableTest {
     }
 
     private void addSetForPlayerA(MatchTable table) {
-        repeat(()->addGameForPlayerA(table),7);
+        repeat(()->addGameForPlayerA(table),6);
     }
 
     private void addSetForPlayerB(MatchTable table) {
-        repeat(()->addGameForPlayerB(table),7);
+        repeat(()->addGameForPlayerB(table),6);
     }
 
     @Test
