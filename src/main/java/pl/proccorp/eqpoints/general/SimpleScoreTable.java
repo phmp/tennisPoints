@@ -23,8 +23,7 @@ public abstract class SimpleScoreTable implements ScoreTable {
 
     @Override
     public void addOneFor(Player player) {
-        int score = getPoints(player);
-        map.put(player, score + 1);
+        map.merge(player, 1, Integer::sum);
     }
 
     @Override
