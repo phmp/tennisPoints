@@ -20,16 +20,19 @@ public class MatchTable {
         pointsTable.addPointFor(player);
         if (pointsTable.won(player)) {
             gamesTable.addPointFor(player);
-            if ("6/6".equals(gamesTable.currentScore())){
-                pointsTable = new TieBreakTable();
-            } else {
-                pointsTable = new PointsTable();
-            }
-
+            resetPointsTable();
             if (gamesTable.won(player)) {
                 setsTable.addPointFor(player);
                 gamesTable = new GamesTable();
             }
+        }
+    }
+
+    private void resetPointsTable() {
+        if ("6/6".equals(gamesTable.currentScore())){
+            pointsTable = new TieBreakTable();
+        } else {
+            pointsTable = new PointsTable();
         }
     }
 
