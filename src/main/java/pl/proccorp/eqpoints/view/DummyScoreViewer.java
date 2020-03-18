@@ -34,10 +34,10 @@ public class DummyScoreViewer {
             "<head>\n" +
             "</head>\n" +
             "<body>\n" +
-            "<a href=\"http://eventory.proccorp.pl:8181/points/A\">A</a> <br></br>\n" +
-            "<a href=\"http://eventory.proccorp.pl:8181/points/B\">B</a> <br></br>\n" +
+            "<a href=\"http://localhost:8181/points/A\">A</a> <br></br>\n" +
+            "<a href=\"http://localhost:8181/points/B\">B</a> <br></br>\n" +
             "{{score}} <br></br>\n" +
-            "<a href=\"http://eventory.proccorp.pl:8181/points/reset\">reset</a> <br></br>\n" +
+            "<a href=\"http://localhost:8181/points/reset\">reset</a> <br></br>\n" +
             "</body>\n" +
             "</html>";
 }

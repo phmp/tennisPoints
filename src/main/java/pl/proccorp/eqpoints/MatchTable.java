@@ -13,6 +13,14 @@ public class MatchTable {
     private ScoreTable gamesTable = new GamesInRegularSetTable();
     private ScoreTable setsTable = new SetsTable();
 
+    public void playerAWonPoint() {
+        playerWonPoint(A);
+    }
+
+    public void playerBWonPoint() {
+        playerWonPoint(B);
+    }
+
     private void playerWonPoint(Player player) {
         pointsTable.addOneFor(player);
         if (pointsTable.won(player)) {
@@ -41,14 +49,6 @@ public class MatchTable {
         } else {
             pointsTable = new PointsTable();
         }
-    }
-
-    public void playerAWonPoint() {
-        playerWonPoint(A);
-    }
-
-    public void playerBWonPoint() {
-        playerWonPoint(B);
     }
 
     public String currentScore() {
